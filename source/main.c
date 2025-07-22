@@ -7,6 +7,8 @@
 int
 main(int argc, char* argv[])
 {
+  printf("opkm version: %s\n", OPKM_VERSION_STR);
+
   git_libgit2_init();
   int major = 0, minor = 0, rev = 0;
   git_libgit2_version(&major, &minor, &rev);

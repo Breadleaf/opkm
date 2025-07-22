@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.16)
-project(opkm VERSION 0.1 LANGUAGES C)
+project(opkm VERSION 0.1.0 LANGUAGES C)
 
 find_package(LibGit2 CONFIG QUIET)
 
@@ -23,5 +23,12 @@ add_executable(opkm ${SRC})
 target_include_directories(opkm PRIVATE ${CMAKE_SOURCE_DIR}/headers)
 target_compile_features(opkm PRIVATE c_std_99)
 target_compile_options(opkm PRIVATE -Wall -Werror -Wpedantic)
+
+target_compile_definitions(opkm PRIVATE
+    OPKM_MAJOR=${PROJECT_VERSION_MAJOR}
+    OPKM_MINOR=${PROJECT_VERSION_MINOR}
+    OPKM_PATCH=${PROJECT_VERSION_PATCH}
+    OPKM_VERSION_STR=\"${PROJECT_VERSION}\"
+)
 
 target_link_libraries(opkm PRIVATE LibGit2::LibGit2 CURL::libcurl)
