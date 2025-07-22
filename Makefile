@@ -20,12 +20,14 @@ C_FLAGS_DEV := -Wall -Werror -Wpedantic
 # dont edit below this point
 # -----------------------------------------------------------------------------
 
+.PHONY: all prod dev clean format
+
 CC ?= $(shell which cc)
 C_FLAGS_BASE := -std=c99
 
 ROOT_DIR := $(shell git rev-parse --show-toplevel)
-C_SOURCE := $(ROOT_DIR)/source/
-C_HEADER := $(ROOT_DIR)/headers/
+C_SOURCE_DIR := $(ROOT_DIR)/source/
+C_HEADER_DIR := $(ROOT_DIR)/headers/
 
 C_PROD_FLAGS := $(C_FLAGS_PROD) $(C_FLAGS_BASE)
 C_DEV_FLAGS := $(C_FLAGS_DEV) $(C_FLAGS_BASE)
@@ -37,12 +39,22 @@ OPKM := opkm
 # `clang/gcc -MM ./source/*.c -I ./headers/` are placed below
 ALL_O := main.o
 
-all: $(OPKM)
+all: prod
+
+prod: C_FLAGS := $(C_PROD_FLAGS)
+prod: $(OPKM)
+
+dev: C_FLAGS := $(C_DEV_FLAGS)
+dev: $(OPKM)
 
 $(OPKM): $(ALL_O)
+	$(CC) $(C_FLAGS) -o $@ $(ALL_O)
 
 $(ALL_O):
-	$(CC) -c $< -o $@ -I $(C_HEADER)
+	$(CC) $(C_FLAGS) -c $< -o $@ -I $(C_HEADER_DIR)
+
+clean:
+	rm $(ALL_O) $(OPKM)
 
 format:
 	clang-format -i $(C_SOURCE_DIR)/*.c $(C_HEADER_DIR)/*.h --style Mozilla
