@@ -1,0 +1,6 @@
+[submodule "deps/libgit2"]
+	path = deps/libgit2
+	url = https://github.com/libgit2/libgit2
+[submodule "deps/curl"]
+	path = deps/curl
+	url = https://github.com/curl/curl
