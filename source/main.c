@@ -4,21 +4,26 @@
 #include <git2.h>
 #include <stdio.h>
 
-int
-main(int argc, char* argv[])
+int main(int argc, char *argv[], char *env[])
 {
-  printf("opkm version: %s\n", OPKM_VERSION_STR);
+    printf("opkm version: %s\n", OPKM_VERSION_STR);
 
-  git_libgit2_init();
-  int major = 0, minor = 0, rev = 0;
-  git_libgit2_version(&major, &minor, &rev);
-  printf("libgit2 version: %d.%d.%d\n", major, minor, rev);
-  git_libgit2_shutdown();
+    git_libgit2_init();
+    int major = 0, minor = 0, rev = 0;
+    git_libgit2_version(&major, &minor, &rev);
+    printf("libgit2 version: %d.%d.%d\n", major, minor, rev);
+    git_libgit2_shutdown();
 
-  curl_global_init(CURL_GLOBAL_DEFAULT);
-  const curl_version_info_data *vi = curl_version_info(CURLVERSION_NOW);
-  printf("libcurl version: %s\n", vi->version);
-  curl_global_cleanup();
+    curl_global_init(CURL_GLOBAL_DEFAULT);
+    const curl_version_info_data *vi = curl_version_info(CURLVERSION_NOW);
+    printf("libcurl version: %s\n", vi->version);
+    curl_global_cleanup();
 
-  return 0;
+    char **ptr = argv;
+    for (int i = 0; *ptr != NULL; ptr++)
+    {
+        printf("%d: %s\n", ++i, *ptr);
+    }
+
+    return 0;
 }

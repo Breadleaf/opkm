@@ -19,7 +19,6 @@
 #endif
 // unused above, guard clauses, check GitRoot/CMakeLists.txt
 
-int
-main(int argc, char* argv[]);
+int main(int argc, char *argv[], char *env[]);
 
 #endif // OPKM_MAIN_H
