@@ -1,0 +1,4 @@
+INSTALL_COMMAND=brew install
+UPDATE_COMMAND=brew update && brew upgrade
+
+PKG:resume https://github.com/Breadleaf/resume nocompile noverify
