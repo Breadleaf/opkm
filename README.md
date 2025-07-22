@@ -3,3 +3,11 @@
 Open Package Manager is a hackable open source package manager that wraps a
 system's underlying package manager. It also supplies an interface to define
 custom packages via git repositories.
+
+## Dev Dependencies
+
+A [posix](https://en.wikipedia.org/wiki/POSIX) system is expected.
+
+- `clang-format`
+- `git`
+- `awk`
