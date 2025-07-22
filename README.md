@@ -12,6 +12,7 @@ A [posix](https://en.wikipedia.org/wiki/POSIX) system is expected.
 - `cmake`
 - `libcurl`
 - `libgit2`
+- `pkg-config`
 
 To build run `cmake -B build .` then `cd build && make`
 
